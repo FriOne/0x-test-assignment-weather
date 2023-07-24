@@ -1,6 +1,6 @@
-import React from 'react';
+import { FC } from 'react';
 
-export const Thunder = () => (
+export const Thunder: FC = () => (
   <svg
     width="26"
     height="28"
