@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import './style.css';
 
-import { Thunder } from './weather/Thunder';
-import { Rain } from './weather/Rain';
+import { ReactComponent as Thunder } from './icons/thunder.svg';
+import { ReactComponent as Rain } from './icons/rain.svg';
 
 import { currentWeather, hourly, dailyForecast } from './data';
 
