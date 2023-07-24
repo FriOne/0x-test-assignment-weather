@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const HeavyRain = () => (
   <svg
     width="26"

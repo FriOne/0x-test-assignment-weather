@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const NightCloudy = () => (
   <svg
     width="29"
