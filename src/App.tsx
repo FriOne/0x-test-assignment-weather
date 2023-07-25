@@ -5,6 +5,7 @@ import { ReactComponent as Thunder } from './icons/thunder.svg';
 import { ReactComponent as Rain } from './icons/rain.svg';
 
 import { currentWeather, hourly, dailyForecast } from './data';
+import { fetchWeather } from './utils/fetchWeather';
 
 export default function App() {
   const [current, setCurrent] = useState(currentWeather);
@@ -37,17 +38,9 @@ export default function App() {
 
   useEffect(() => {
     async function getWeather() {
-      // TODO Add keys
-      const apiKey = '';
-      const locationKey = '';
-      const apiUrl = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}`;
+      const { location, current, forecast } = await fetchWeather({ lat: 41.390205, lng: 2.154007 });
 
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      setCurrent(data.current);
-      setForecast(data.hourly);
-
-      localStorage.setItem('forecast', JSON.stringify(data.hourly));
+      console.log({ location, current, forecast });
     }
   }, []);
 
