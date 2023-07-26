@@ -1,7 +1,9 @@
 import { useIsMountedRef } from '../../hooks/useIsMountedRef';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useMemo, useReducer } from 'react';
 import { Coords, ForecastState } from '../../types';
 import { fetchWeather } from '../../utils/fetchWeather';
+import { getWeatherCache, setWeatherCache } from '../../utils/currentWeatherStorage';
+import { isToday } from '../../utils/isToday';
 
 type State = {
   isLoading: boolean;
@@ -19,8 +21,11 @@ const enum ActionType {
 }
 
 type Action = {
-  type: ActionType.initGeolocation | ActionType.initGeolocationError | ActionType.startLoading;
+  type: ActionType.initGeolocationError | ActionType.startLoading;
   payload?: undefined;
+} | {
+  type: ActionType.initGeolocation;
+  payload: { silent: boolean };
 } | {
   type: ActionType.loadingSuccess;
   payload: ForecastState;
@@ -30,17 +35,24 @@ type Action = {
 };
 
 export function useForecastState() {
+  const cachedWeather = useMemo(() => getWeatherCache(), []);
+  const isCacheValid = !!cachedWeather?.current?.last_updated_epoch && isToday(cachedWeather?.current?.last_updated_epoch * 1000);
+  const initialState = {
+    isLoading: !isCacheValid,
+    forecastState: cachedWeather ?? undefined,
+  };
+
   const isMounted = useIsMountedRef();
-  const [state, dispatch] = useReducer(reducer, { isLoading: true });
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    dispatch({ type: ActionType.initGeolocation });
+    dispatch({ type: ActionType.initGeolocation, payload: { silent: isCacheValid } });
     navigator.geolocation.getCurrentPosition(onGeolocationSuccess, onGeolocationError);
 
     async function onGeolocationSuccess(position: GeolocationPosition) {
       const { latitude: lat, longitude: lng } = position.coords;
 
-      void fetchInitialWeather({ lat, lng });
+      void fetchInitialWeather({ lat, lng }, true);
     }
 
     function onGeolocationError() {
@@ -52,7 +64,7 @@ export function useForecastState() {
       void fetchInitialWeather(defaultLocation);
     }
 
-    async function fetchInitialWeather(coords: Coords) {
+    async function fetchInitialWeather(coords: Coords, needToSaveInCache = false) {
       if (!isMounted.current) {
         return;
       }
@@ -60,6 +72,10 @@ export function useForecastState() {
       try {
         dispatch({ type: ActionType.startLoading });
         const loadedState = await fetchWeather(coords);
+
+        if (needToSaveInCache) {
+          setWeatherCache(loadedState);
+        }
 
         if (!isMounted.current) {
           return;
@@ -79,17 +95,13 @@ function reducer(state: State, action: Action) {
   switch (action.type) {
     case ActionType.initGeolocation:
       return {
-        isLoading: true,
+        ...state,
+        isLoading: !action.payload.silent,
       };
     case ActionType.initGeolocationError:
       return {
         ...state,
         isDefaultLocationLoaded: true,
-      };
-    case ActionType.startLoading:
-      return {
-        ...state,
-        isLoading: true,
       };
     case ActionType.loadingSuccess:
       return {

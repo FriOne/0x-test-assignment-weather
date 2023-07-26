@@ -7,6 +7,9 @@ import { useMainBackgroundColor } from './useMainBackgroundColor';
 import { useForecastState } from './useForecastState';
 
 import classes from './App.module.css';
+import { setWeatherCache } from '../../utils/currentWeatherStorage';
+
+const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
 export default function App() {
   const {
@@ -42,6 +45,10 @@ export default function App() {
   } = forecastState!;
   const dayForecast = forecast.forecastday[0];
 
+  const handleCacheCleanClick = () => {
+    setWeatherCache(null);
+  };
+
   return (
     <div className={classes.root}>
       <CurrentLocationInfo
@@ -68,6 +75,12 @@ export default function App() {
         className={classes.dailyForecast}
         forecast={forecast.forecastday}
       />
+
+      {isDev && (
+        <button className={classes.cleanCacheButton} onClick={handleCacheCleanClick}>
+          Clean Cache
+        </button>
+      )}
     </div>
   );
 }

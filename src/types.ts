@@ -16,6 +16,7 @@ export type LocationInfo = {
 };
 
 export type WeatherInfo = {
+  last_updated_epoch: number;
   humidity: number;
   wind_dir: string;
   wind_kph: number;

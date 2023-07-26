@@ -46,6 +46,12 @@
   grid-area: dailyForecast;
 }
 
+.cleanCacheButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
 @media (min-width: 900px) {
   .root {
     display: grid;
