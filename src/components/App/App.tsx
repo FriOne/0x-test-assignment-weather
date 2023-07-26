@@ -19,7 +19,7 @@ export default function App() {
 
   if (isLoading) {
     return (
-      <div className={classes.root}>
+      <div className={classes.spinnerWrapper}>
         <Spinner />
       </div>
     );
@@ -27,8 +27,8 @@ export default function App() {
 
   if (error) {
     return (
-      <div className={classes.root}>
-        <ForecastBlock className={classes.error}>
+      <div className={classes.error}>
+        <ForecastBlock>
           {error}
         </ForecastBlock>
       </div>

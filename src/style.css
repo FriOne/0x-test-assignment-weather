@@ -5,6 +5,7 @@
 :root {
   --block-padding: 15px;
   --separator-color: rgba(255, 255, 255, 0.25);
+  --top-margin: 50px;
 }
 
 html {

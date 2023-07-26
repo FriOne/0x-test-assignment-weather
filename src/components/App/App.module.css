@@ -7,18 +7,25 @@
   width: 100%;
   min-height: 100%;
   margin: 0 auto;
-  padding: 50px 10px;
+  padding: var(--top-margin) 10px;
 }
 
 .currentLocationInfo {
   grid-area: currentLocationInfo;
 }
 
+.spinnerWrapper {
+  padding: var(--top-margin) 10px;
+  text-align: center;
+}
+
 .error {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: var(--top-margin) 10px;
   font-size: 17px;
   font-weight: 200;
   text-align: center;
-  grid-area: error;
 }
 
 .defaultLocationWarning {
@@ -48,13 +55,13 @@
       "currentLocationInfo dailyForecast"
       "hourlyForecast dailyForecast"
       "defaultLocationWarning dailyForecast";
-    gap: 10px;
+    gap: 30px;
     min-width: auto;
     max-width: none;
     width: var(--width);
     min-height: auto;
 
-    --width: 840px;
+    --width: 800px;
     --left-column-width: 340px;
   }
 
