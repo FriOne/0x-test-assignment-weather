@@ -1,0 +1,7 @@
+.root {
+  min-width: 360px;
+}
+
+.dayInfo + .dayInfo {
+  border-top: 1px solid var(--separator-color);
+}

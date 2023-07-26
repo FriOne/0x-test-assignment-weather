@@ -1,0 +1,32 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 320px;
+  max-width: 460px;
+  width: 100%;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 50px 10px;
+}
+
+.error {
+  font-size: 17px;
+  font-weight: 200;
+  text-align: center;
+}
+
+.defaultLocationWarning {
+  margin-top: 21px;
+  font-size: 17px;
+  font-weight: 200;
+  text-align: center;
+}
+
+.hourlyForecast {
+  margin-top: 21px;
+}
+
+.dailyForecast {
+  margin-top: 8px;
+}

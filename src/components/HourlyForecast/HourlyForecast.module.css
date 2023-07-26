@@ -1,0 +1,29 @@
+.hoursInfo {
+  display: flex;
+  gap: 30px;
+  margin: 14px calc(-1 * var(--block-padding)) 0;
+  padding: 0 var(--block-padding);
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.hoursInfo::-webkit-scrollbar {
+  display: none;
+}
+
+.hourInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 45px;
+  font-weight: 500;
+}
+
+.hourText {
+  font-size: 1.7rem;
+}
+
+.hourTemperature {
+  font-size: 2.2rem;
+}

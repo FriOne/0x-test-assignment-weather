@@ -1,0 +1,45 @@
+.root {
+  position: relative;
+  width: var(--width);
+  height: var(--height);
+  border-radius: calc(var(--height) / 2);
+  background-color: rgba(0, 0, 0, .15);
+
+  --width: 100px;
+  --height: 4px;
+  --from: 0%;
+  --to: 100%;
+  --current: 50%;
+  --stripe-index: 1;
+}
+
+.coloredStripe {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--from);
+  z-index: var(--stripe-index);
+  width: calc(var(--to) - var(--from));
+  border-radius: calc(var(--height) / 2);
+  background-image: linear-gradient(to right, #96d0a7, #ef8734);
+  background-repeat: no-repeat;
+  background-size: var(--width);
+  background-position: var(--from) 100%;
+}
+
+.current {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--current);
+  z-index: calc(var(--stripe-index) + 1);
+  width: var(--height);
+  height: var(--height);
+  box-sizing: content-box;
+  border: 2px solid #3f4257;
+  border-radius: 50%;
+  transform: translate(var(--half-circle), var(--half-circle));
+  background-color: #fff;
+
+  --half-circle: calc(-1 * var(--height) / 2);
+}
