@@ -10,10 +10,15 @@
   padding: 50px 10px;
 }
 
+.currentLocationInfo {
+  grid-area: currentLocationInfo;
+}
+
 .error {
   font-size: 17px;
   font-weight: 200;
   text-align: center;
+  grid-area: error;
 }
 
 .defaultLocationWarning {
@@ -21,12 +26,47 @@
   font-size: 17px;
   font-weight: 200;
   text-align: center;
+  grid-area: defaultLocationWarning;
 }
 
 .hourlyForecast {
   margin-top: 21px;
+  grid-area: hourlyForecast;
 }
 
 .dailyForecast {
   margin-top: 8px;
+  grid-area: dailyForecast;
+}
+
+@media (min-width: 900px) {
+  .root {
+    display: grid;
+    grid-template-columns: var(--left-column-width) calc(var(--width) - var(--left-column-width));
+    grid-template-rows: auto;
+    grid-template-areas:
+      "currentLocationInfo dailyForecast"
+      "hourlyForecast dailyForecast"
+      "defaultLocationWarning dailyForecast";
+    gap: 10px;
+    min-width: auto;
+    max-width: none;
+    width: var(--width);
+    min-height: auto;
+
+    --width: 840px;
+    --left-column-width: 340px;
+  }
+
+  .dailyForecast {
+    align-self: flex-start;
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+  }
+
+  .defaultLocationWarning {
+    margin-top: 0;
+    align-self: flex-end;
+  }
 }
