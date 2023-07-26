@@ -3,6 +3,7 @@ import { HourlyForecast } from '../HourlyForecast/HourlyForecast';
 import { DailyForecast } from '../DailyForecast/DailyForecast';
 import { ForecastBlock } from '../ForecastBlock/ForecastBlock';
 import { Spinner } from '../Spinner/Spinner';
+import { useMainBackgroundColor } from './useMainBackgroundColor';
 import { useForecastState } from './useForecastState';
 
 import classes from './App.module.css';
@@ -14,6 +15,7 @@ export default function App() {
     forecastState,
     isDefaultLocationLoaded,
   } = useForecastState();
+  useMainBackgroundColor();
 
   if (isLoading) {
     return (
@@ -44,7 +46,7 @@ export default function App() {
     <div className={classes.root}>
       <CurrentLocationInfo
         className={classes.currentLocationInfo}
-        name={location.name}
+        name={location.region}
         currentTemperature={current.temp_c}
         condition={current.condition.text}
         maxTemperature={dayForecast.day.maxtemp_c}

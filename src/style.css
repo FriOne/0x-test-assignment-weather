@@ -21,6 +21,27 @@ body {
 #root {
   min-height: 100vh;
   justify-content: center;
-  background: linear-gradient(to bottom, #011e33, #625a72);
-  color: white;
+  background: linear-gradient(to bottom, var(--main-bg-top-color), var(--main-bg-bottom-color));
+  color: #fff;
+}
+
+#root,
+#root[data-theme=day] {
+  --main-bg-top-color: rgba(73, 130, 173, 1);
+  --main-bg-bottom-color: rgba(144, 187, 216, 0.5);
+}
+
+#root[data-theme=morning] {
+  --main-bg-top-color: rgba(129, 197, 229, 1);
+  --main-bg-bottom-color: rgba(220, 146, 127, 1);
+}
+
+#root[data-theme=evening] {
+  --main-bg-top-color: rgba(111, 109, 140, 1);
+  --main-bg-bottom-color: rgba(188, 97, 90, 0.5);
+}
+
+#root[data-theme=night] {
+  --main-bg-top-color: rgba(1, 30, 51, 1);
+  --main-bg-bottom-color: rgba(61, 53, 81, 0.8);
 }
