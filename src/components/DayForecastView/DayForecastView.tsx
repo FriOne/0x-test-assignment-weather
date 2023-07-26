@@ -2,11 +2,12 @@ import { FC, useContext } from 'react';
 
 import { ConditionUrlIcon } from '../ConditionUrlIcon/ConditionUrlIcon';
 import { TemperatureRange } from '../TemperatureRange/TemperatureRange';
+import { ForecastTemperatureContext } from '../../contexts/ForecastTemperatureContext';
 import { getDayNameByTimestamp } from '../../utils/getDayNameByTimestamp';
+import { isToday } from '../../utils/isToday';
 import { Condition } from '../../types';
 
 import classes from './DayForecastView.module.css';
-import { ForecastTemperatureContext } from '../../contexts/ForecastTemperatureContext';
 
 type Props = {
   className?: string;
@@ -26,7 +27,7 @@ export const DayForecastView: FC<Props> = ({
   maxTemperature,
   precipitationProbability,
 }) => {
-  const { min, max } = useContext(ForecastTemperatureContext);
+  const { min, max, current } = useContext(ForecastTemperatureContext);
   const onePercent = (max - min) / 100;
 
   return (
@@ -45,7 +46,11 @@ export const DayForecastView: FC<Props> = ({
 
       <div className={classes.temperatureInfo}>
         <div className={classes.minTemperature}>{parseInt(minTemperature.toString())}°</div>
-        <TemperatureRange from={(minTemperature - min) / onePercent} to={(maxTemperature - min) / onePercent} />
+        <TemperatureRange
+          from={(minTemperature - min) / onePercent}
+          to={(maxTemperature - min) / onePercent}
+          current={isToday(timestamp) ? (current - min) / onePercent : undefined}
+        />
         <div className={classes.maxTemperature}>{parseInt(maxTemperature.toString())}°</div>
       </div>
     </div>

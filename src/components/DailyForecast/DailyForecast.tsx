@@ -17,6 +17,10 @@ export const DailyForecast: FC<Props> = ({
   forecast,
 }) => {
   const forecastTemperatureContextValue = useMemo(() => {
+    if (forecast.length === 0) {
+      return { min: 0, max: 0, current: 0 };
+    }
+
     let min, max;
 
     for (const { day } of forecast) {
@@ -28,7 +32,11 @@ export const DailyForecast: FC<Props> = ({
       }
     }
 
-    return { min: min ?? 0, max: max ?? 0 };
+    const currentHour = forecast[0].hour.find(({ time_epoch }) => {
+      return new Date(time_epoch * 1000).getHours() === new Date().getHours();
+    })!;
+
+    return { min: min ?? 0, max: max ?? 0, current: parseInt(currentHour.temp_c.toString()) };
   }, [forecast]);
 
   return (
