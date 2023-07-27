@@ -5,9 +5,9 @@ import { ForecastBlock } from '../ForecastBlock/ForecastBlock';
 import { Spinner } from '../Spinner/Spinner';
 import { useMainBackgroundColor } from './useMainBackgroundColor';
 import { useForecastState } from './useForecastState';
+import { setWeatherCache } from '../../utils/currentWeatherStorage';
 
 import classes from './App.module.css';
-import { setWeatherCache } from '../../utils/currentWeatherStorage';
 
 const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 

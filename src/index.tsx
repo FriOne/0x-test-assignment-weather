@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 import App from './components/App/App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import { reportWebVitals } from './reportWebVitals';
 
 import './style.css';
 
@@ -16,3 +17,4 @@ root.render(
 );
 
 serviceWorkerRegistration.register();
+reportWebVitals();

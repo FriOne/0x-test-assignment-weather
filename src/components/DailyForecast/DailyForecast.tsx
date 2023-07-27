@@ -43,7 +43,7 @@ export const DailyForecast: FC<Props> = ({
     <ForecastBlock className={[classes.root, className].join(' ')} title="10-Day forecast">
       <ForecastTemperatureContext.Provider value={forecastTemperatureContextValue}>
         <div className={classes.daysInfo}>
-          {forecast.map(({ day, date, date_epoch}) => {
+          {forecast.map(({ day, date, date_epoch }) => {
             const {
               maxtemp_c,
               mintemp_c,
