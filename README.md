@@ -1,50 +1,130 @@
 # 0+X Test Assignment: Weather App
 
-In this assignment, you will complete a weather app that was started by another developer. Your tasks are to **add new features** and **improve the source code**.
+## Before start
 
-The app so far is written in plain JavaScript. Set up **TypeScript** and finish the app using TS.
+To use open weather data, you need to put your API key to `.env` file into variable `REACT_APP_WEATHER_API_KEY`.
+To create the API key go to https://weatherapi.com and create the account.
 
-Please, make sure to **document** your solutions and reasons behind taken technical decisions in a Markdown file and attach it to the project.
+## Development
 
-Prepare and send us your solution as a **GitHub repository**. Use the existing code as the initial project state and create a **PR with all the changes** you're going to make.
+This is react script environment, so to start development use:
+```bash
+npm start
+```
 
-## New Features
+To check PWA you need to run this:
+```bash
+npm install -g serve
+NODE_ENV=production npm run build
+serve -s build
+```
 
-Extend the functionality of the app with new features:
-
-1. Replace the dummy app data with **real weather data** by using the [AccuWeather API](https://developer.accuweather.com/packages) or other weather API providers of your choice. You can use any library for network requests, caching data, and managing data flow or app life cycle.
-2. Update the background of the app to **show different gradients** based on the user's **local time**. You will find all gradient variations in [this Figma file](https://www.figma.com/file/9ZAG6Hk7Csm58IeStWn5GZ/0%2BX-Test-Assignment%3A-Weather-App).
-3. Create a **“Loading” screen** for the app with any loading indicator in it.
-
-## Bug Fixes
-
-Fix the bugs in the source code.
-
-- The “Hourly Forecast” section should have a **scrollable list** of weather conditions for each hour until the next day.
-- The “10-Day Forecast” section should have columns that **form a straight line** as [in the design](https://www.figma.com/file/9ZAG6Hk7Csm58IeStWn5GZ/0%2BX-Test-Assignment%3A-Weather-App).
-- Each row of the “10-Day Forecast” should contain a temperature range with a gradient based on the lowest and highest temperature **for the whole 10-day period**. The temperatures of the current day (min, max, avg) should be placed on that range.
-
-## Best Practices
-
-Improve the quality of the existing source code by fixing poor solutions and implementing better practices. Pay attention to **any issues you find**, such as:
-
-- Accessibility problems
-- Brittle components
-- Unoptimal styling
-- Low performance
-- High coupling
-- Poor architecture
-- Bad code metrics, etc
-
-## Performance
-
-Ensure that the app is performant by **measuring** web vitals or other relevant characteristics. Add those to the documentation file.
-
-## Additional Features
-
-The following features are **optional, so you can skip them** if you don't have enough time.
-
-- Adapt the UI for **wider screens** (tablets and desktops), make sure there aren't any rendering issues.
-- Improve the current location detection feature by showing the current **city name** instead of “Current Location” when the app gets access to the user's location.
-- Handle any network errors **gracefully** to prevent “data flashing” on the screen.
-- Make the app “installable” and **work offline**. You might need to save the latest data locally on the device to show it when offline.
+Current web vitals:
+```json
+{
+  "FCP": {
+    "name": "FCP",
+      "value": 111.39999997615814,
+      "rating": "good",
+      "delta": 111.39999997615814,
+      "entries": [
+      {
+        "name": "first-contentful-paint",
+        "entryType": "paint",
+        "startTime": 111.39999997615814,
+        "duration": 0
+      }
+    ],
+      "id": "v3-1690453107362-9438791445180",
+      "navigationType": "navigate"
+  },
+  "TTFB": {
+    "name": "TTFB",
+      "value": 9.200000047683716,
+      "rating": "good",
+      "delta": 9.200000047683716,
+      "entries": [
+      {
+        "name": "http://localhost:3000/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 208.29999995231628,
+        "initiatorType": "navigation",
+        "nextHopProtocol": "",
+        "renderBlockingStatus": "non-blocking",
+        "workerStart": 0,
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 2.700000047683716,
+        "domainLookupStart": 2.700000047683716,
+        "domainLookupEnd": 2.700000047683716,
+        "connectStart": 2.700000047683716,
+        "secureConnectionStart": 0,
+        "connectEnd": 2.700000047683716,
+        "requestStart": 8.5,
+        "responseStart": 9.200000047683716,
+        "responseEnd": 11.799999952316284,
+        "transferSize": 300,
+        "encodedBodySize": 550,
+        "decodedBodySize": 550,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 47.39999997615814,
+        "domContentLoadedEventStart": 87.20000004768372,
+        "domContentLoadedEventEnd": 87.20000004768372,
+        "domComplete": 207.60000002384186,
+        "loadEventStart": 208.20000004768372,
+        "loadEventEnd": 208.29999995231628,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0
+      }
+    ],
+    "id": "v3-1690453107362-1964400469940",
+    "navigationType": "navigate"
+  },
+  "LCP": {
+    "name": "LCP",
+      "value": 111.39999997615814,
+      "rating": "good",
+      "delta": 111.39999997615814,
+      "entries": [
+      {
+        "name": "",
+        "entryType": "largest-contentful-paint",
+        "startTime": 111.39999997615814,
+        "duration": 0,
+        "size": 17666,
+        "renderTime": 111.399,
+        "loadTime": 0,
+        "firstAnimatedFrameTime": 0,
+        "id": "",
+        "url": ""
+      }
+    ],
+    "id": "v3-1690453107362-5785265198852",
+    "navigationType": "navigate"
+  },
+  "FID": {
+    "name": "FID",
+      "value": 3.6999999284744263,
+      "rating": "good",
+      "delta": 3.6999999284744263,
+      "entries": [
+      {
+        "name": "pointerdown",
+        "entryType": "first-input",
+        "startTime": 1139.1000000238419,
+        "duration": 8,
+        "processingStart": 1142.7999999523163,
+        "processingEnd": 1142.8999999761581,
+        "cancelable": true
+      }
+    ],
+    "id": "v3-1690453107362-1838192198498",
+    "navigationType": "navigate"
+  }
+}
+```

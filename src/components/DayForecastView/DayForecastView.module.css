@@ -1,0 +1,40 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 55px;
+}
+
+.day {
+  width: 25%;
+  font-size: 2.2rem;
+  font-weight: 500;
+}
+
+.condition {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: center;
+  align-items: center;
+}
+
+.precipitationProbability {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #81cffa;
+}
+
+.temperatureInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 190px;
+  font-size: 2.2rem;
+  font-weight: 500;
+}
+
+.minTemperature {
+  color: rgba(255, 255, 255, .3)
+}
