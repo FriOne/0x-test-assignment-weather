@@ -5,6 +5,6 @@ export function getTimeByTimestamp(timestamp: number) {
 
   return new Intl.DateTimeFormat('en-US', { timeStyle: 'short' })
     .format(new Date(timestamp))
-    .replace(':00', '')
+    .replace(/:\d+/, '')
     .replace(' ', '');
 }
