@@ -11,3 +11,10 @@ This is react script environment, so to start development use:
 ```bash
 npm start
 ```
+
+To check PWA you need to run this:
+```bash
+npm install -g serve
+NODE_ENV=production npm run build
+serve -s build
+```

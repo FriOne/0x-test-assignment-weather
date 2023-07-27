@@ -36,18 +36,22 @@ type Action = {
 
 export function useForecastState() {
   const cachedWeather = useMemo(() => getWeatherCache(), []);
-  const isCacheValid = !!cachedWeather?.current?.last_updated_epoch && isToday(cachedWeather?.current?.last_updated_epoch * 1000);
+  const isCacheValid = !!cachedWeather?.current?.last_updated_epoch
+    && isToday(cachedWeather?.current.last_updated_epoch * 1000);
   const initialState = {
     isLoading: !isCacheValid,
-    forecastState: cachedWeather ?? undefined,
+    error: window.navigator.onLine ? undefined : (isCacheValid ? 'Have no data to show it offline' : undefined),
+    forecastState: isCacheValid ? cachedWeather : undefined,
   };
 
   const isMounted = useIsMountedRef();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    dispatch({ type: ActionType.initGeolocation, payload: { silent: isCacheValid } });
-    navigator.geolocation.getCurrentPosition(onGeolocationSuccess, onGeolocationError);
+    if (window.navigator.onLine) {
+      dispatch({ type: ActionType.initGeolocation, payload: { silent: isCacheValid } });
+      navigator.geolocation.getCurrentPosition(onGeolocationSuccess, onGeolocationError);
+    }
 
     async function onGeolocationSuccess(position: GeolocationPosition) {
       const { latitude: lat, longitude: lng } = position.coords;
@@ -111,7 +115,8 @@ function reducer(state: State, action: Action) {
       };
     case ActionType.loadingError:
       return {
-        isLoading: true,
+        ...state,
+        isLoading: false,
         error: action.payload,
       };
   }
